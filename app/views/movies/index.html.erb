@@ -1,0 +1,14 @@
+<%= link_to "Add a movie", new_movie_path %>
+<h1>Movies</h1>
+<hr />
+
+<% @movies.each do |movie| %>
+  <h3><%= link_to movie.title, movie_path(movie) %></h3>
+  <h4><%= movie.director %></h4>
+  <p><%= movie.runtime_in_minutes %> minutes</p>
+  <p>Released <%= movie.release_date %></p>
+  <%= link_to image_tag(movie.poster_image_url), movie_path(movie) %>
+  <p><%= movie.description %></p>
+  <hr />
+<% end %>
+
