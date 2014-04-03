@@ -1,4 +1,7 @@
 class Movie < ActiveRecord::Base
+
+  has_many :reviews
+
   validates :title, presence: true
   validates :director, presence: true
   validates :runtime_in_minutes, numericality: { only_integer: true }
@@ -7,11 +10,21 @@ class Movie < ActiveRecord::Base
   validates :release_date, presence: true
   validate :release_date_is_in_the_future
 
+  def review_average
+    if reviews.size > 0
+      reviews.sum(:rating_out_of_ten)/reviews.size
+    else
+      0
+    end
+    # reviews.sum(:rating_out_of_ten)/reviews.size if reviews.size
+    # reviews.sum(:rating_out_of_ten)/reviews.size
+  end
+
   protected
 
   def release_date_is_in_the_future
     if release_date.present?
-      errors.add(:release_date, "should be in the future") if release < Date.today
+      errors.add(:release_date, "should be in the future") if release_date < Date.today
     end
   end
 

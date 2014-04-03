@@ -2,7 +2,7 @@
 
   <% if @movie.errors.any? %>
     <div>
-      <%= pluralize(@movie.errors.count, "mouse") %> prevented this movie from being submitted:
+      <%= pluralize(@movie.errors.count, "ox") %> prevented this movie from being submitted:
         <ul>
           <% @movie.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
